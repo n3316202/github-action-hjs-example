@@ -1,0 +1,35 @@
+name: Run hello.py on push
+
+on:
+  push:
+    branches:
+      - actions-3-hello-with-secrets
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Copy files to EC2
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_KEY }}
+          source: "."
+          target: "~/hello-app"
+
+      - name: SSH into EC2 and run Docker
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_KEY }}
+          script: |
+            cd ~/hello-app
+            docker build -t hello-app .
+            docker stop hello-app || true && docker rm hello-app || true
+            docker run --name hello-app hello-app

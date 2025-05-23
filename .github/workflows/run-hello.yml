@@ -23,7 +23,7 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           source: "hello-app/*"
-          target: "~/hello-app"
+          target:  "~"
 
       - name: SSH into EC2 and run Docker
         uses: appleboy/ssh-action@v1.0.0

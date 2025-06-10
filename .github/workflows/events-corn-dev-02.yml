@@ -1,0 +1,12 @@
+name: Daily Task
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # UTC 기준 매일 00:00
+
+jobs:
+  daily-job:
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: echo "This runs every day at midnight (UTC)."

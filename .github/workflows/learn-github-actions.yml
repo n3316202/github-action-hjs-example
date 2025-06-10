@@ -1,6 +1,9 @@
 # https://docs.github.com/en/actions/learn-github-actions/introduction-to-github-actions#create-an-example-workflow
 name: learn-github-actions
-on: [push]
+on:
+  push:
+    branches:
+      - learn-github-actions
 jobs:
   check-bats-version:
     runs-on: ubuntu-latest

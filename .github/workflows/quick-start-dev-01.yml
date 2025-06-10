@@ -5,7 +5,7 @@ on:
     branches:
       - dev-01-기본예제-2025-06-10
 jobs:
-  Explore-GitHub-Actions:
+  dev-01-example-actions:
     runs-on: ubuntu-latest
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."

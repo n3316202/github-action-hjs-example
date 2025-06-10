@@ -3,12 +3,16 @@ name: learn-github-actions
 on:
   push:
     branches:
-      - learn-github-actions
+      - main
 jobs:
   check-bats-version:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      #CI/CD 작업 전에 코드를 복사해오는 단계
+      #/home/runner/work/<REPO_NAME>/<REPO_NAME> 위치에 다운로드
+      - uses: actions/checkout@v3
+      - run: ls -al #현재 디렉토리 ($GITHUB_WORKSPACE)에 체크아웃된 리포지토리 내용을 출력
+      
       - uses: actions/setup-node@v1
       - run: npm install -g bats
       - run: bats -v
@@ -17,5 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Echo Hello World Job
     steps:
-      - uses: actions/checkout@v2
+      
+      - uses: actions/checkout@v3 #CI/CD 작업 전에 코드를 복사해오는 단계
+      
       - run: echo Hello World!

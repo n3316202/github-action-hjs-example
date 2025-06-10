@@ -8,9 +8,11 @@ on:
   push:
     paths:
       - '**.md'
+    branches:
+       - dev_2_이벤트_종류-2025-06-10
 
 jobs:
-  dev-01-example-actions:
+  dev-02-example-actions:
     runs-on: ubuntu-latest
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
